@@ -16,7 +16,7 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.1.2"
+version = "0.1.3"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
@@ -30,7 +30,7 @@ setup(name=name,
       author=author,
       author_email="zhouheng@gene.ac",
       url=url,
-      packages=["jingyun_cli", "jingyun_cli/util", "jingyun_cli/json"],
+      packages=["jingyun_cli", "jingyun_cli/util", "jingyun_cli/json", "jingyun_cli/oss"],
       license=license,
       description=short_description,
       long_description=long_description,
@@ -39,5 +39,7 @@ setup(name=name,
       entry_points='''[console_scripts]
             json-merge=jingyun_cli.json.cli:json_merge
             jy-json-merge=jingyun_cli.json.cli:json_merge
+            oss-download=jingyun_cli.oss.cli:multi_download
+            jy-oss-download=jingyun_cli.oss.cli:multi_download
       '''
       )
