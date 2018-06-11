@@ -16,14 +16,14 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.1.3"
+version = "0.1.4"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
 short_description = "jingyun deploy cli tools"
 long_description = """"""
 keywords = "jingyun-cli"
-install_requires = []
+install_requires = ["requests"]
 
 setup(name=name,
       version=version,
@@ -41,5 +41,6 @@ setup(name=name,
             jy-json-merge=jingyun_cli.json.cli:json_merge
             oss-download=jingyun_cli.oss.cli:multi_download
             jy-oss-download=jingyun_cli.oss.cli:multi_download
+            jy-key=jingyun_cli.key.cli:handle_key
       '''
       )

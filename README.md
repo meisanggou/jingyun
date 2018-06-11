@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.1.4
+key cli 上线 jy-key
+
 ## 0.1.3
 oss cli 上线 jy-oss-download
 
