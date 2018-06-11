@@ -80,6 +80,8 @@ def handle_key():
                          default=default_endpoint)
     arg_man.add_argument("-f", "--filters", dest="filters", help=g_help("filters"), action="append", default=[])
     arg_man.add_argument("-p", "--print", dest="print_key", help=g_help("print_key"), nargs="*", metavar="key")
+    arg_man.add_argument("--only-value", dest="only_value", help=g_help("only_value"), action="store_true",
+                         default=False)
     arg_man.add_argument("-r", "--replace", dest="replace_file", help=g_help("replace_file"), metavar="file")
     if len(sys.argv) <= 1:
         sys.argv.append("-h")
@@ -89,10 +91,13 @@ def handle_key():
     if args.print_key is not None:
         for p_key in args.print_key:
             if p_key in key_items:
-                print("%s\t%s" % (p_key, key_items[p_key]))
+                if args.only_value is True:
+                    print(key_items[p_key])
+                else:
+                    print("%s\t%s" % (p_key, key_items[p_key]))
             else:
                 error_and_exit(g_help("key_not_exist", p_key))
 
 if __name__ == "__main__":
-    sys.argv.extend(["-a", "mysql", "-r", "mns.conf", "-p", "region", "access_id", "-f", "ljd=true"])
+    sys.argv.extend(["-a", "mns", "-r", "mns.conf", "-p", "region", "access_id", "-f", "ljd=true", "--only-value"])
     handle_key()
