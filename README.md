@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.1.7
+add jy-conf-format
+
 ## 0.1.6
 jy-key add --only-value 只打印密钥要打印的密钥中的属性值，不打印属性
 
