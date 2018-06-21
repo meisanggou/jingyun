@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.1.8
+jy-conf-format add mode params
+
 ## 0.1.7
 add jy-conf-format
 
