@@ -5,6 +5,7 @@ import os
 import sys
 import argparse
 import re
+import ConfigParser
 try:
     from .help import g_help, error_and_exit
 except ValueError:
@@ -32,6 +33,22 @@ def rewrite_conf(file_path, mode):
         n_c = c.format(**os.environ)
     with open(file_path, "w") as w:
         w.write(n_c)
+
+
+def read(conf_path, section, options):
+    if os.path.exists(conf_path) is False:
+        msg = g_help("file_not_exist", conf_path)
+        error_and_exit(msg)
+    config = ConfigParser.ConfigParser()
+    config.read(conf_path)
+    if config.has_section(section) is False:
+        error_and_exit(g_help("section_not_found", section))
+    values = []
+    for option in options:
+        if config.has_option(section, option) is False:
+            error_and_exit(g_help("option_not_found", option))
+        values.append(config.get(section, option))
+    return values
 
 
 def list_files(directory, prefix, end, re_filter):
@@ -75,6 +92,22 @@ def environ_format():
         rewrite_conf(item, args.mode)
         print("format %s success\n" % item)
 
+
+def read_conf():
+    arg_man.add_argument("-c", "--conf-path", dest="conf_path", help=g_help("conf_file"), metavar="conf_path",
+                         required=True)
+    arg_man.add_argument("-s", "--section", dest="section", help=g_help("section"), metavar="section", required=True)
+    arg_man.add_argument("option", metavar="option", nargs="*", help=g_help("option"))
+
+    if len(sys.argv) <= 1:
+        sys.argv.append("-h")
+
+    args = arg_man.parse_args()
+
+    values = read(args.conf_path, args.section, args.option)
+    for v in values:
+        print(v)
+
 if __name__ == "__main__":
-    sys.argv.extend(["-d", "/data/Web2/conf", "-p", "m", "-e", ".conf", "-f", r"\S+?_\S+"])
-    environ_format()
+    sys.argv.extend(["-c", "/data/Web2/conf/mysql_app.conf", "-s", "db_basic", "port", "host"])
+    read_conf()

@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.2.1
+add jy-conf-read
+
 ## 0.1.10
 add jy-ssh-nonkey
 

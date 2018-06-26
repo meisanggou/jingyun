@@ -17,6 +17,11 @@ directory_help = {'en': '', 'cn': "遍历目录下所有文件，可与参数-p 
 filter_help = {"en": "", "cn": "筛选条件，正则表达式，根据筛选条件进行match操作.-d存在时有效"}
 prefix_help = {"en": "", "cn": "文件名开头，根据根据文件开头筛选目录中的文件.-d存在时有效"}
 end_help = {"en": "", "cn": "文件名结尾，根据根据文件结尾筛选目录中的文件.-d存在时有效"}
+section_help = {"en": "", "cn": "要查询的配置文件的哪部分"}
+section_not_found_help = {"en": "", "cn": "要查询的配置文件%s部分不存在"}
+option_help = {"en": "", "cn": "要查询的配置选项名"}
+option_not_found_help = {"en": "", "cn": "要查询的配置选项%s不存在"}
+
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())
 help_dict = dict()

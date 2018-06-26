@@ -16,7 +16,7 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.1.10"
+version = "0.2.1"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
@@ -44,6 +44,7 @@ setup(name=name,
             jy-oss-download=jingyun_cli.oss.cli:multi_download
             jy-key=jingyun_cli.key.cli:handle_key
             jy-conf-format=jingyun_cli.conf.cli:environ_format
+            jy-conf-read=jingyun_cli.conf.cli:read_conf
             jy-ssh-nonkey=jingyun_cli.ssh.cli:non_key
       '''
       )
