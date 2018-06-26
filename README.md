@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.1.10
+add jy-ssh-nonkey
+
 ## 0.1.9
 jy-conf-format 支持遍历和筛选整个目录下的文件
 
