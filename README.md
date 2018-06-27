@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.2.2
+add jy-jingd-usermod
+
 # 0.2.1
 add jy-conf-read
 

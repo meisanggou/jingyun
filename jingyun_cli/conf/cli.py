@@ -6,6 +6,7 @@ import sys
 import argparse
 import re
 import ConfigParser
+from jingyun_cli import logger
 try:
     from .help import g_help, error_and_exit
 except ValueError:
@@ -35,18 +36,30 @@ def rewrite_conf(file_path, mode):
         w.write(n_c)
 
 
-def read(conf_path, section, options):
+def read(conf_path, section, options, ignore=False):
     if os.path.exists(conf_path) is False:
         msg = g_help("file_not_exist", conf_path)
+        if ignore is True:
+            logger.warning(msg)
+            return map(lambda x: "", options)
         error_and_exit(msg)
     config = ConfigParser.ConfigParser()
     config.read(conf_path)
     if config.has_section(section) is False:
-        error_and_exit(g_help("section_not_found", section))
+        msg = g_help("section_not_found", section)
+        if ignore is True:
+            logger.warning(msg)
+            return map(lambda x: "", options)
+        error_and_exit(msg)
     values = []
     for option in options:
         if config.has_option(section, option) is False:
-            error_and_exit(g_help("option_not_found", option))
+            msg = g_help("option_not_found", option)
+            if ignore is True:
+                logger.warning(msg)
+                values.append("")
+                continue
+            error_and_exit(msg)
         values.append(config.get(section, option))
     return values
 
@@ -88,14 +101,16 @@ def environ_format():
     if args.directory is not None:
         files.extend(list_files(args.directory, args.prefix, args.end, args.filter))
     for item in files:
-        print("format %s" % item)
+        logger.info("format %s" % item)
         rewrite_conf(item, args.mode)
-        print("format %s success\n" % item)
+        logger.info("format %s success\n" % item)
 
 
 def read_conf():
     arg_man.add_argument("-c", "--conf-path", dest="conf_path", help=g_help("conf_file"), metavar="conf_path",
                          required=True)
+    arg_man.add_argument("-i", "--ignore-error", dest="ignore_error", help=g_help("ignore_error"), action='store_true',
+                         default=False)
     arg_man.add_argument("-s", "--section", dest="section", help=g_help("section"), metavar="section", required=True)
     arg_man.add_argument("option", metavar="option", nargs="*", help=g_help("option"))
 
@@ -104,10 +119,10 @@ def read_conf():
 
     args = arg_man.parse_args()
 
-    values = read(args.conf_path, args.section, args.option)
+    values = read(args.conf_path, args.section, args.option, ignore=args.ignore_error)
     for v in values:
         print(v)
 
 if __name__ == "__main__":
-    sys.argv.extend(["-c", "/data/Web2/conf/mysql_app.conf", "-s", "db_basic", "port", "host"])
+    sys.argv.extend(["-c", "/data/Web2/conf/mysql_app.conf", "-s", "db_basic", "port", "host2", "-i"])
     read_conf()

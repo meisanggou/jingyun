@@ -21,6 +21,7 @@ section_help = {"en": "", "cn": "要查询的配置文件的哪部分"}
 section_not_found_help = {"en": "", "cn": "要查询的配置文件%s部分不存在"}
 option_help = {"en": "", "cn": "要查询的配置选项名"}
 option_not_found_help = {"en": "", "cn": "要查询的配置选项%s不存在"}
+ignore_error_help = {"end": "", "cn": "遇到错误如配置不存在，配置项不存在时，不报错仅打印信息"}
 
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())

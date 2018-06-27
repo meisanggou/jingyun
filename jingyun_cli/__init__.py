@@ -11,4 +11,4 @@ logger = logging.getLogger("jy_cli")
 
 sh = logging.StreamHandler()
 logger.addHandler(sh)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
