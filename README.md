@@ -2,6 +2,7 @@
 
 # 0.2.2
 add jy-jingd-usermod
+udpate jy-conf-read 添加参数 -i --ignore
 
 # 0.2.1
 add jy-conf-read
