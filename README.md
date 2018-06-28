@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.2.6
+jy-oss-download下载时如果文件存在将不进行下载
+
 # 0.2.5
 jy-supervisord
 jy-supervisorctl

@@ -4,6 +4,7 @@
 import os
 import sys
 import argparse
+from jingyun_cli import logger
 try:
     from .help import g_help, error_and_exit
 except ValueError:
@@ -48,10 +49,16 @@ def multi_download():
         out_dir = "."
     for item in f_inputs:
         save_path = os.path.join(out_dir, item)
+        if os.path.exists(save_path) is True:
+            logger.warning(g_help("exist", item))
+            continue
+        logger.info(g_help("download", item, save_path))
         url = get_download_url(args.endpoint, args.oss_dir, item)
         cmd = ["curl", "-o", save_path, url]
         e_code = os.system(" ".join(cmd))
+        if e_code != 0:
+            error_and_exit(g_help("error", item))
 
 if __name__ == "__main__":
-    sys.argv.extend(["-d", "shell", "nonkey.sh", "a.sh"])
+    sys.argv.extend(["-d", "shell", "nonkey.sh", "wa.sh"])
     multi_download()

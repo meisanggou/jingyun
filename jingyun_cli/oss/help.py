@@ -14,6 +14,9 @@ oss_dir_help = {"en": "the oss directory of the oss file", "cn": "要下载的os
 endpoint_help = {"en": "oss server endpoint, for example http://jy-softs.oss-cn-beijing.aliyuncs.com",
                  "cn": "服务器端点,例如http://jy-softs.oss-cn-beijing.aliyuncs.com"}
 
+exist_help = {"en": "", "cn": "文件%s已存在将不执行下载操作"}
+error_help = {"en": "", "cn": "下载文件%s未执行成功"}
+download_help = {"en": "", "cn": "下载文件 %s 到 %s"}
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())
 help_dict = dict()
