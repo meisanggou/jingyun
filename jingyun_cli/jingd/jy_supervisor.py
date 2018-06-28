@@ -18,7 +18,7 @@ def set_conf():
     conf_dir = os.environ.get("JINGD_CONF_DIR")
     if conf_dir is None:
         error_and_exit(g_help("defect_env", "JINGD_CONF_DIR"))
-    conf_path = os.path.join(conf_dir, "supervisord.cond")
+    conf_path = os.path.join(conf_dir, "supervisord.conf")
     if os.path.exists(conf_path) is False:
         error_and_exit(g_help("file_lost"))
     sys.argv.extend(["-c", conf_path])

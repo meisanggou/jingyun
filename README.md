@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.2.4
+fix bug in jingd.jy_supervisor
+
 # 0.2.3
 jy-supervisord
 jy-supervisorctl
