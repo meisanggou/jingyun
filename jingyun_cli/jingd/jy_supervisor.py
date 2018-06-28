@@ -21,7 +21,8 @@ def set_conf():
     conf_path = os.path.join(conf_dir, "supervisord.conf")
     if os.path.exists(conf_path) is False:
         error_and_exit(g_help("file_lost"))
-    sys.argv.extend(["-c", conf_path])
+    sys.argv.insert(1, "-c")
+    sys.argv.insert(2, conf_path)
 
 
 def jy_supervisorctl():
