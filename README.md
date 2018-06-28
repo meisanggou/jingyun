@@ -1,5 +1,9 @@
 # jingyun
 
+# 0.2.3
+jy-supervisord
+jy-supervisorctl
+
 # 0.2.2
 add jy-jingd-usermod
 udpate jy-conf-read 添加参数 -i --ignore

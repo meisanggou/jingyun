@@ -23,7 +23,7 @@ author = "meisanggou"
 short_description = "jingyun deploy cli tools"
 long_description = """"""
 keywords = "jingyun-cli"
-install_requires = ["requests", "six"]
+install_requires = ["requests", "six", "supervisor"]
 
 setup(name=name,
       version=version,
@@ -47,5 +47,7 @@ setup(name=name,
             jy-conf-read=jingyun_cli.conf.cli:read_conf
             jy-ssh-nonkey=jingyun_cli.ssh.cli:non_key
             jy-jingd-usermod=jingyun_cli.jingd.user:cli_main
+            jy-supervisorctl=jingyun_cli.jingd.jy_supervisor:jy_supervisorctl
+            jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord
       '''
       )

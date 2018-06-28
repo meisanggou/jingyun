@@ -7,7 +7,6 @@ __author__ = '鹛桑够'
 
 
 lang = "cn"
-
 encoding = "utf-8"
 second_encoding = "gb18030"
 
@@ -35,8 +34,25 @@ def is_string(s):
     return True
 
 
+default_help_dict = dict(
+    file_lost=dict(
+        en="file [%s] not exist or can not readable",
+        cn="文件[%s]不存在或者无权限读取"
+    ),
+    env_lost=dict(
+        en="",
+        cn=""
+    )
+)
+
+
 def help_value(help_dict, key, *args):
-    msg = help_dict[key][lang]
+    if key in help_dict:
+        msg = help_dict[key][lang]
+    elif key in default_help_dict:
+        msg = default_help_dict[key][lang]
+    else:
+        raise KeyError("Not find help for %s" % key)
     msg = decode(msg)
     if len(args) > 0:
         args = map(decode, args)
