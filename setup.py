@@ -25,6 +25,19 @@ long_description = """"""
 keywords = "jingyun-cli"
 install_requires = ["requests", "six", "supervisor"]
 
+entry_points = {'console_scripts': [
+    'json-merge=jingyun_cli.json.cli:json_merge',
+    'jy-json-merge=jingyun_cli.json.cli:json_merge',
+    'jy-oss-download=jingyun_cli.oss.cli:multi_download',
+    'jy-key=jingyun_cli.key.cli:handle_key',
+    'jy-conf-format=jingyun_cli.conf.cli:environ_format',
+    'jy-conf-read=jingyun_cli.conf.cli:read_conf',
+    'jy-ssh-nonkey=jingyun_cli.ssh.cli:non_key',
+    'jy-jingd-usermod=jingyun_cli.jingd.user:cli_main',
+    'jy-supervisorctl=jingyun_cli.jingd.jy_supervisor:jy_supervisorctl',
+    'jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord'
+]}
+
 setup(name=name,
       version=version,
       author=author,
@@ -37,17 +50,5 @@ setup(name=name,
       long_description=long_description,
       keywords=keywords,
       install_requires=install_requires,
-      entry_points='''[console_scripts]
-            json-merge=jingyun_cli.json.cli:json_merge
-            jy-json-merge=jingyun_cli.json.cli:json_merge
-            oss-download=jingyun_cli.oss.cli:multi_download
-            jy-oss-download=jingyun_cli.oss.cli:multi_download
-            jy-key=jingyun_cli.key.cli:handle_key
-            jy-conf-format=jingyun_cli.conf.cli:environ_format
-            jy-conf-read=jingyun_cli.conf.cli:read_conf
-            jy-ssh-nonkey=jingyun_cli.ssh.cli:non_key
-            jy-jingd-usermod=jingyun_cli.jingd.user:cli_main
-            jy-supervisorctl=jingyun_cli.jingd.jy_supervisor:jy_supervisorctl
-            jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord
-      '''
+      entry_points=entry_points
       )
