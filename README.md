@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.2.9
+jy-supervisord jy-supervisorctl 执行前，先进行source .bash_profile
+
 # 0.2.8
 jy-oss-download 添加参数 -f --force 无论要下载的文件是否已存在，都进行下载
 

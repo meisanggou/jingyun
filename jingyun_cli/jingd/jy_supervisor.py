@@ -5,7 +5,7 @@ import os
 import sys
 from supervisor.supervisorctl import main as supervisorctl_main
 from supervisor.supervisord import main as supervisord_main
-
+from jingyun_cli.util.env import source_local
 try:
     from .help import g_help, error_and_exit
 except ValueError:
@@ -15,6 +15,7 @@ __author__ = '鹛桑够'
 
 
 def set_conf():
+    source_local()
     conf_dir = os.environ.get("JINGD_CONF_DIR")
     if conf_dir is None:
         error_and_exit(g_help("defect_env", "JINGD_CONF_DIR"))
@@ -35,3 +36,9 @@ def jy_supervisord():
     set_conf()
     code = supervisord_main()
     sys.exit(code)
+
+
+if __name__ == "__main__":
+    import sys
+    sys.argv.append("status")
+    jy_supervisorctl()
