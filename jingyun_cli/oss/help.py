@@ -18,6 +18,7 @@ name_help = {"en": "", "cn": "下载后保存的文件名，仅在下载文件�
 exist_help = {"en": "", "cn": "文件%s已存在将不执行下载操作"}
 error_help = {"en": "", "cn": "下载文件%s未执行成功"}
 download_help = {"en": "", "cn": "下载文件 %s 到 %s"}
+force_help = {"en": "", "cn": "无论要下载的文件是否已存在，都进行下载"}
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())
 help_dict = dict()

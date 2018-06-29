@@ -1,8 +1,10 @@
 # jingyun
 
+# 0.2.8
+jy-oss-download 添加参数 -f --force 无论要下载的文件是否已存在，都进行下载
+
 # 0.2.7
 jy-oss-download 添加参数 -n --name  下载后保存的文件名，仅在下载文件只有一个时有效，超过一个下载文件将忽略该参数
-
 
 # 0.2.6
 jy-oss-download下载时如果文件存在将不进行下载
