@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 # coding: utf-8
 
+import sys
 import six
 
 __author__ = '鹛桑够'
@@ -34,6 +35,11 @@ def is_string(s):
     return True
 
 
+def error_and_exit(msg, error_code=1):
+    sys.stderr.write(msg)
+    sys.stderr.write("\n")
+    sys.exit(error_code)
+
 default_help_dict = dict(
     file_lost=dict(
         en="file [%s] not exist or can not readable",
@@ -42,6 +48,10 @@ default_help_dict = dict(
     env_lost=dict(
         en="",
         cn=""
+    ),
+    debug=dict(
+        en=" Enter the debug mode,  print out as much information as possible.",
+        cn="进入debug模式尽可能多的打印出信息"
     )
 )
 

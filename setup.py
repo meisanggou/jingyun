@@ -16,14 +16,14 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.3.1"
+version = "0.3.2"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
 short_description = "jingyun deploy cli tools"
 long_description = """"""
 keywords = "jingyun-cli"
-install_requires = ["requests", "six", "supervisor"]
+install_requires = ["requests", "six", "supervisor", "docker-compose"]
 
 entry_points = {'console_scripts': [
     'json-merge=jingyun_cli.json.cli:json_merge',
@@ -36,7 +36,8 @@ entry_points = {'console_scripts': [
     'jy-jingd-usermod=jingyun_cli.jingd.user:cli_main',
     'jy-supervisorctl=jingyun_cli.jingd.jy_supervisor:jy_supervisorctl',
     'jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord',
-    'jy-docker-clear=jingyun_cli.docker.clear:clear'
+    'jy-docker-clear=jingyun_cli.docker.clear:clear',
+    'jy-docker-compose=jingyun_cli.docker.jy_compose:main'
 ]}
 
 setup(name=name,
