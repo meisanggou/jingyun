@@ -17,6 +17,9 @@ volumes_help = {"en": "", "cn": "要映射的目录，例如/host/data:/vm/data�
 restart_help = {"en": "", "cn": "容器的重启策略，可以设置为always"}
 create_help = {"en": "", "cn": "文件%s不存在，将会创建"}
 exist_service_help = {"en": "", "cn": "compose服务已经存在，将会更新"}
+command_help = {"en": "", "cn": "启动容器时执行的命令"}
+env_help = {"env": "", "cn": "启动容器时设置的环境变量"}
+working_dir_help = {"env": "", "cn": "容器启动时的工作目录"}
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())
 help_dict = dict()

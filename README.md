@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.3.3
+jy-docker-compose
+
 # 0.2.9
 jy-supervisord jy-supervisorctl 执行前，先进行source .bash_profile
 

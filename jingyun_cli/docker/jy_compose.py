@@ -34,6 +34,12 @@ def write_conf(args):
         service_item["ports"] = args.ports
     if args.restart is not None:
         service_item["restart"] = args.restart
+    if args.command is not None:
+        service_item["command"] = args.command
+    if args.environments is not None:
+        service_item["environment"] = args.environments
+    if args.working_dir is not None:
+        service_item["working_dir"] = args.working_dir
     file_path = get_file(args.compose_dir)
     if os.path.exists(file_path) is False:
         logger.debug(g_help("create", file_path))
@@ -52,17 +58,22 @@ def main():
     commands_man = args_man.add_subparsers(title="Commands", description=None, metavar="COMMAND", dest="sub_cmd")
 
     config_man = commands_man.add_parser("config", help=g_help("action_config"))
+    config_man.add_argument("command", nargs="*", help=g_help("command"))
     config_man.add_argument("-d", dest="compose_dir", help=g_help("compose_dir"))
+    config_man.add_argument("-e", "--environment", dest="environments", help=g_help("env"))
     config_man.add_argument("-f", "--file", dest="file_path", help=g_help("file"))
     config_man.add_argument("-n", "--name", dest="name", help=g_help("name"), required=True)
     config_man.add_argument("-i", "--image", dest="image", help=g_help("image"), required=True)
     config_man.add_argument("-v", "--volumes", dest="volumes", help=g_help("volumes"), action="append")
     config_man.add_argument("-p", "--ports", help=g_help("ports"), action="append")
     config_man.add_argument("--restart", help=g_help("restart"))
+    config_man.add_argument("-w", "--working-dir", dest="working_dir", help=g_help("working_dir"))
+
 
     # up_man = commands_man.add_parser("up", help="execute docker-compose up")
     # up_man.add_argument("args", nargs="*")
-
+    if len(sys.argv) <= 1:
+        sys.argv.append("-h")
     args = parse_args()
     if args.sub_cmd == "config":
         write_conf(args)
@@ -74,5 +85,6 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.argv.extend(["--debug", "config", "-n", "redis", "-i", "redis", "-p", "${REDIS_PORT}:6379"])
+    sys.argv.extend(["--debug", "config", "-n", "qc", "-i", "meisanggou/qc", "-v", "${JINGD_DATA_ROOT}:${JINGD_DATA_ROOT}",
+                     "-v", "${JINGD_CONF_DIR}:${JINGD_CONF_DIR}", "-v", "${GATCAPI_DIR}/Worker:/opt/worker", "-w", "/opt/worker", "python", "SampleSequencingLocalWorker.py"])
     main()
