@@ -60,7 +60,7 @@ def main():
     config_man = commands_man.add_parser("config", help=g_help("action_config"))
     config_man.add_argument("command", nargs="*", help=g_help("command"))
     config_man.add_argument("-d", dest="compose_dir", help=g_help("compose_dir"))
-    config_man.add_argument("-e", "--environment", dest="environments", help=g_help("env"))
+    config_man.add_argument("-e", "--environment", dest="environments", help=g_help("env"), action="append")
     config_man.add_argument("-f", "--file", dest="file_path", help=g_help("file"))
     config_man.add_argument("-n", "--name", dest="name", help=g_help("name"), required=True)
     config_man.add_argument("-i", "--image", dest="image", help=g_help("image"), required=True)
