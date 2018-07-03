@@ -35,7 +35,7 @@ def write_conf(args):
     if args.restart is not None:
         service_item["restart"] = args.restart
     if args.command is not None:
-        service_item["command"] = args.command
+        service_item["command"] = " ".join(args.command)
     if args.environments is not None:
         service_item["environment"] = args.environments
     if args.working_dir is not None:

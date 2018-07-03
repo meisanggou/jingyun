@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.3.5
+fix jy-docker-compose bug
+
 # 0.3.4
 fix jy-docker-compose bug
 
