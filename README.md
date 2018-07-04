@@ -1,6 +1,6 @@
 # jingyun
 
-# 0.3.7
+# 0.3.8
 add jy-sql-table
 
 # 0.3.6
