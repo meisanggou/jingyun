@@ -48,5 +48,5 @@ def op_table():
 
 
 if __name__ == "__main__":
-    sys.argv.extend(["create", "-f", "../../../GATCAPI/Table/Structure/gene.json"])
+    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-f", "../../../GATCAPI/Table/Structure/project.json"])
     op_table()

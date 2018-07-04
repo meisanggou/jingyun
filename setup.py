@@ -23,7 +23,7 @@ author = "meisanggou"
 short_description = "jingyun deploy cli tools"
 long_description = """"""
 keywords = "jingyun-cli"
-install_requires = ["requests", "six", "supervisor", "docker-compose"]
+install_requires = ["requests", "six", "supervisor", "docker-compose", "mysqldb-rich"]
 
 entry_points = {'console_scripts': [
     'json-merge=jingyun_cli.json.cli:json_merge',
