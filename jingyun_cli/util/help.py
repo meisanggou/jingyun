@@ -45,6 +45,10 @@ default_help_dict = dict(
         en="file [%s] not exist or can not readable",
         cn="文件[%s]不存在或者无权限读取"
     ),
+    dir_lost=dict(
+        en="directory [%s] not exist or can not readable",
+        cn="目录[%s]不存在或者无权限读取"
+    ),
     env_lost=dict(
         en="",
         cn=""

@@ -1,5 +1,8 @@
 # jingyun
 
+# 0.3.7
+add jy-sql-table
+
 # 0.3.6
 jy-oss-download  添加参数 --allow-custom
 
