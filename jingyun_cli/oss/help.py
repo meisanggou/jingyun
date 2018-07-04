@@ -3,7 +3,7 @@
 
 import sys
 from functools import partial
-from jingyun_cli.util.help import help_value
+from jingyun_cli.util.help import help_value, error_and_exit
 
 __author__ = '鹛桑够'
 
@@ -19,6 +19,9 @@ exist_help = {"en": "", "cn": "文件%s已存在将不执行下载操作"}
 error_help = {"en": "", "cn": "下载文件%s未执行成功"}
 download_help = {"en": "", "cn": "下载文件 %s 到 %s"}
 force_help = {"en": "", "cn": "无论要下载的文件是否已存在，都进行下载"}
+allow_custom_help = {"en": "", "cn": "是否允许定制，允许定制时，优先下载传入目录，环境变量JINGD_ENV子目录的文件"}
+empty_env_help = {"en": "", "cn": "设置了allow_custom，但是却没有环境变量JINGD_ENV"}
+head_error_help = {"en": "", "cn": "未获得链接%s信息，返回状态为%s"}
 
 help_keys = filter(lambda x: x.endswith("_help"), locals().keys())
 help_dict = dict()
@@ -27,9 +30,3 @@ for key in help_keys:
 
 
 g_help = partial(help_value, help_dict)
-
-
-def error_and_exit(msg, error_code=1):
-    sys.stderr.write(msg)
-    sys.stderr.write("\n")
-    sys.exit(error_code)
