@@ -67,7 +67,7 @@ def unlock_user(account):
 
 
 def grant_genetic(account):
-    url = "/api/v2/auth/grant/genetic"
+    url = "/api/v2/auth/grant/genetic/"
     method = "POST"
     data = {"account": account, "auth_code": "JINGDu"}
     request_api(method, url, data)

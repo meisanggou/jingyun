@@ -1,41 +1,44 @@
 # jingyun
 
-# 0.3.8
+## 0.3.9
+fix bug jy-jingd-usermod -a
+
+## 0.3.8
 add jy-sql-table
 
-# 0.3.6
+## 0.3.6
 jy-oss-download  添加参数 --allow-custom
 
-# 0.3.5
+## 0.3.5
 fix jy-docker-compose bug
 
-# 0.3.4
+## 0.3.4
 fix jy-docker-compose bug
 
-# 0.3.3
+## 0.3.3
 jy-docker-compose
 
-# 0.2.9
+## 0.2.9
 jy-supervisord jy-supervisorctl 执行前，先进行source .bash_profile
 
-# 0.2.8
+#3 0.2.8
 jy-oss-download 添加参数 -f --force 无论要下载的文件是否已存在，都进行下载
 
-# 0.2.7
+## 0.2.7
 jy-oss-download 添加参数 -n --name  下载后保存的文件名，仅在下载文件只有一个时有效，超过一个下载文件将忽略该参数
 
-# 0.2.6
+## 0.2.6
 jy-oss-download下载时如果文件存在将不进行下载
 
-# 0.2.5
+## 0.2.5
 jy-supervisord
 jy-supervisorctl
 
-# 0.2.2
+## 0.2.2
 add jy-jingd-usermod
 udpate jy-conf-read 添加参数 -i --ignore
 
-# 0.2.1
+## 0.2.1
 add jy-conf-read
 
 ## 0.1.10

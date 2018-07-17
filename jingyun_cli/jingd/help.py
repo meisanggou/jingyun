@@ -4,7 +4,7 @@
 import sys
 from functools import partial
 from jingyun_cli import logger
-from jingyun_cli.util.help import help_value
+from jingyun_cli.util.help import help_value, error_and_exit
 
 __author__ = '鹛桑够'
 
@@ -20,8 +20,3 @@ for key in help_keys:
 
 g_help = partial(help_value, help_dict)
 
-
-def error_and_exit(msg, error_code=1):
-    sys.stderr.write(msg)
-    sys.stderr.write("\n")
-    sys.exit(error_code)
