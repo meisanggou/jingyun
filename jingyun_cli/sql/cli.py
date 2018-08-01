@@ -3,7 +3,8 @@
 
 import os
 import sys
-from mysqldb_rich.db2 import TableDB
+import re
+from mysqldb_rich.db2 import TableDB, DB
 from jingyun_cli import logger
 from jingyun_cli.util.cli_args import args_man
 from jingyun_cli.util.help import error_and_exit
@@ -47,6 +48,34 @@ def op_table():
         create_table(args)
 
 
+def create_fptv(args):
+    db = DB(conf_path=args.conf_path)
+    for file_path in args.files:
+        logger.info(g_help("handle_file", file_path))
+        with open(file_path) as rf:
+            c = rf.read()
+            ds = re.findall(r"(DROP[\s\S]+? IF EXISTS[\s\S]+?(;|\n))", c, re.I)
+            for item in ds:
+                db.execute(item[0])
+            fs = re.findall(r"(CREATE[\s\S]+?(END;|END\n|$))", c)
+            for item in fs:
+                db.execute(item[0])
+
+
+def op_fptv():
+    commands_man = args_man.add_subparsers(title="Commands", description=None, metavar="COMMAND OPTIONS", dest="sub_cmd")
+    create_man = commands_man.add_parser("create", help=g_help("create"))
+    create_man.add_argument("-c", metavar="path", dest="conf_path", help=g_help("conf_path"))
+    # create_man.add_argument("-d", metavar="path", dest="directory", help=g_help("dir"))
+    create_man.add_argument("-f", metavar="path", dest="files", help=g_help("fptv_file"), action="append", default=[],)
+
+    if len(sys.argv) <= 1:
+        sys.argv.append("-h")
+    args = args_man.parse_args()
+    if args.sub_cmd == "create":
+        create_fptv(args)
+
+
 if __name__ == "__main__":
-    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-f", "../../../GATCAPI/Table/Structure/project.json"])
-    op_table()
+    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-f", "../../../GATCAPI/Table/Trigger/t_update_stage.trigger"])
+    op_fptv()

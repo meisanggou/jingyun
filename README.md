@@ -1,5 +1,9 @@
 # jingyun
 
+
+## 0.4.0
+add jy-sql-fptv
+
 ## 0.3.9
 fix bug jy-jingd-usermod -a
 

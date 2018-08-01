@@ -16,7 +16,7 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.3.9"
+version = "0.4.0"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
@@ -38,7 +38,8 @@ entry_points = {'console_scripts': [
     'jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord',
     'jy-docker-clear=jingyun_cli.docker.clear:clear',
     'jy-docker-compose=jingyun_cli.docker.jy_compose:main',
-    'jy-sql-table=jingyun_cli.sql.cli:op_table'
+    'jy-sql-table=jingyun_cli.sql.cli:op_table',
+    'jy-sql-fptv=jingyun_cli.sql.cli:op_fptv'
 ]}
 
 setup(name=name,
