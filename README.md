@@ -1,8 +1,8 @@
 # jingyun
 
 
-## 0.4.0
-add jy-sql-fptv
+## 0.4.1
+add jy-sql-table 支持新建视图等，-f 支持后面跟多个参数，支持--file-prefix
 
 ## 0.3.9
 fix bug jy-jingd-usermod -a

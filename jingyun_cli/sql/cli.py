@@ -4,7 +4,7 @@
 import os
 import sys
 import re
-from mysqldb_rich.db2 import TableDB, DB
+from mysqldb_rich.db2 import TableDB
 from jingyun_cli import logger
 from jingyun_cli.util.cli_args import args_man
 from jingyun_cli.util.help import error_and_exit
@@ -26,10 +26,28 @@ def create_table(args):
     if args.conf_path is None:
         args.conf_path = get_environ("DB_CONF_PATH")
     t = TableDB(conf_path=args.conf_path)
-    for item in args.files:
-        logger.info(g_help("handle_file", item))
-        check_file_exist(item)
-        r = t.create_from_json_file(item)
+    suffix_comp = re.compile(r"\w+\.(json|function|procedure|trigger|view)$", re.I)
+    all_files = args.files
+    if args.file_prefix is not None:
+        all_files = map(lambda x: args.file_prefix + x, all_files)
+    for file_path in all_files:
+        filename = os.path.split(file_path)[1]
+        if suffix_comp.match(filename) is None:
+            logger.warning(g_help("skip_file", file_path))
+            continue
+        logger.info(g_help("handle_file", file_path))
+        check_file_exist(file_path)
+        if file_path.endswith(".json"):
+            r = t.create_from_json_file(file_path)
+        else:
+            with open(file_path) as rf:
+                c = rf.read()
+                ds = re.findall(r"(DROP[\s\S]+? IF EXISTS[\s\S]+?(;|\n))", c, re.I)
+                for item in ds:
+                    t.execute(item[0])
+                fs = re.findall(r"(CREATE[\s\S]+?(END;|END\n|$))", c)
+                for item in fs:
+                    t.execute(item[0])
     if args.directory is not None:
         t.create_from_dir(args.directory)
 
@@ -39,7 +57,8 @@ def op_table():
     create_man = commands_man.add_parser("create", help=g_help("create"))
     create_man.add_argument("-c", metavar="path", dest="conf_path", help=g_help("conf_path"))
     create_man.add_argument("-d", metavar="path", dest="directory", help=g_help("dir"))
-    create_man.add_argument("-f", metavar="path", dest="files", help=g_help("file"), action="append", default=[],)
+    create_man.add_argument("--file-prefix", metavar="path", dest="file_prefix", help=g_help("file_prefix"))
+    create_man.add_argument("-f", metavar="path", dest="files", help=g_help("file"), nargs="*", default=[])
 
     if len(sys.argv) <= 1:
         sys.argv.append("-h")
@@ -48,34 +67,8 @@ def op_table():
         create_table(args)
 
 
-def create_fptv(args):
-    db = DB(conf_path=args.conf_path)
-    for file_path in args.files:
-        logger.info(g_help("handle_file", file_path))
-        with open(file_path) as rf:
-            c = rf.read()
-            ds = re.findall(r"(DROP[\s\S]+? IF EXISTS[\s\S]+?(;|\n))", c, re.I)
-            for item in ds:
-                db.execute(item[0])
-            fs = re.findall(r"(CREATE[\s\S]+?(END;|END\n|$))", c)
-            for item in fs:
-                db.execute(item[0])
-
-
-def op_fptv():
-    commands_man = args_man.add_subparsers(title="Commands", description=None, metavar="COMMAND OPTIONS", dest="sub_cmd")
-    create_man = commands_man.add_parser("create", help=g_help("create"))
-    create_man.add_argument("-c", metavar="path", dest="conf_path", help=g_help("conf_path"))
-    # create_man.add_argument("-d", metavar="path", dest="directory", help=g_help("dir"))
-    create_man.add_argument("-f", metavar="path", dest="files", help=g_help("fptv_file"), action="append", default=[],)
-
-    if len(sys.argv) <= 1:
-        sys.argv.append("-h")
-    args = args_man.parse_args()
-    if args.sub_cmd == "create":
-        create_fptv(args)
-
 
 if __name__ == "__main__":
-    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-f", "../../../GATCAPI/Table/Trigger/t_update_stage.trigger"])
-    op_fptv()
+    # sys.argv.extend(["create", "-h"])
+    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "--file-prefix", "../../../GATCAPI/Table/Trigger/", "-f", "t_update_stage.trigger", "t_update_stage.trigger"])
+    op_table()
