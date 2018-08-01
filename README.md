@@ -1,5 +1,7 @@
 # jingyun
 
+## 0.4.2
+add jy-sql-link
 
 ## 0.4.1
 add jy-sql-table 支持新建视图等，-f 支持后面跟多个参数，支持--file-prefix

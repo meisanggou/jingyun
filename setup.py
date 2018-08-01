@@ -38,7 +38,8 @@ entry_points = {'console_scripts': [
     'jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord',
     'jy-docker-clear=jingyun_cli.docker.clear:clear',
     'jy-docker-compose=jingyun_cli.docker.jy_compose:main',
-    'jy-sql-table=jingyun_cli.sql.cli:op_table'
+    'jy-sql-table=jingyun_cli.sql.cli:op_table',
+    'jy-sql-link=jingyun_cli.sql.cli:link',
 ]}
 
 setup(name=name,

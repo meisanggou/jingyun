@@ -4,7 +4,7 @@
 import os
 import sys
 import re
-from mysqldb_rich.db2 import TableDB
+from mysqldb_rich.db2 import TableDB, DB
 from jingyun_cli import logger
 from jingyun_cli.util.cli_args import args_man
 from jingyun_cli.util.help import error_and_exit
@@ -68,8 +68,18 @@ def op_table():
         create_table(args)
 
 
+def link():
+    args_man.add_argument("-c", metavar="path", dest="conf_path", help=g_help("conf_path"))
+    args_man.add_argument("-r", "--readonly", dest="readonly", action="store_true", help=g_help("readonly"),
+                          default=False)
+    args = args_man.parse_args()
+    if args.conf_path is None:
+        args.conf_path = get_environ("DB_CONF_PATH")
+    t = DB(conf_path=args.conf_path, readonly=args.readonly)
+    t.link()
 
 if __name__ == "__main__":
     # sys.argv.extend(["create", "-h"])
-    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-d", "../../../GATCAPI/Table/Function/", "--file-prefix", "../../../GATCAPI/Table/Trigger/", "-f", "t_update_stage.trigger", "t_update_stage.trigger"])
-    op_table()
+    # sys.argv.extend(["create", "-c", "/mnt/dataJINGD/conf/mysql_app.conf", "-d", "../../../GATCAPI/Table/Function/", "--file-prefix", "../../../GATCAPI/Table/Trigger/", "-f", "t_update_stage.trigger", "t_update_stage.trigger"])
+    sys.argv.extend(["-c", "/mnt/data/JINGD/conf/mysql_app.conf"])
+    link()
