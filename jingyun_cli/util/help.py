@@ -36,7 +36,7 @@ def is_string(s):
 
 
 def error_and_exit(msg, error_code=1):
-    sys.stderr.write(str(msg))
+    sys.stderr.write(encode(msg))
     sys.stderr.write("\n")
     sys.exit(error_code)
 

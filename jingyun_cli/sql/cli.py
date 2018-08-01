@@ -30,6 +30,9 @@ def create_table(args):
     all_files = args.files
     if args.file_prefix is not None:
         all_files = map(lambda x: args.file_prefix + x, all_files)
+    if args.directory is not None:
+        desc_files = os.listdir(args.directory)
+        all_files.extend(map(lambda x: os.path.join(args.directory, x), desc_files))
     for file_path in all_files:
         filename = os.path.split(file_path)[1]
         if suffix_comp.match(filename) is None:
@@ -48,8 +51,6 @@ def create_table(args):
                 fs = re.findall(r"(CREATE[\s\S]+?(END;|END\n|$))", c)
                 for item in fs:
                     t.execute(item[0])
-    if args.directory is not None:
-        t.create_from_dir(args.directory)
 
 
 def op_table():
@@ -70,5 +71,5 @@ def op_table():
 
 if __name__ == "__main__":
     # sys.argv.extend(["create", "-h"])
-    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "--file-prefix", "../../../GATCAPI/Table/Trigger/", "-f", "t_update_stage.trigger", "t_update_stage.trigger"])
+    sys.argv.extend(["create", "-c", "/mnt/data/JINGD/conf/mysql_app.conf", "-d", "../../../GATCAPI/Table/Function/", "--file-prefix", "../../../GATCAPI/Table/Trigger/", "-f", "t_update_stage.trigger", "t_update_stage.trigger"])
     op_table()
