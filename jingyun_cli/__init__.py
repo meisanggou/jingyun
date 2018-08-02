@@ -8,7 +8,7 @@ __author__ = '鹛桑够'
 
 
 logger = logging.getLogger("jy_cli")
-
-sh = logging.StreamHandler()
-logger.addHandler(sh)
-logger.setLevel(logging.INFO)
+if len(logger.handlers) <= 0:
+    sh = logging.StreamHandler()
+    logger.addHandler(sh)
+    logger.setLevel(logging.INFO)
