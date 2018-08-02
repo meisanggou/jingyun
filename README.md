@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.4.4
+add jy-server-ip
+
 ## 0.4.3
 add jy-server-port
 

@@ -9,6 +9,6 @@ __author__ = '鹛桑够'
 
 logger = logging.getLogger("jy_cli")
 if len(logger.handlers) <= 0:
-    sh = logging.StreamHandler()
+    sh = logging.StreamHandler(sys.stdout)
     logger.addHandler(sh)
     logger.setLevel(logging.INFO)

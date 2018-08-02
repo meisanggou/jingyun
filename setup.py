@@ -41,6 +41,7 @@ entry_points = {'console_scripts': [
     'jy-sql-table=jingyun_cli.sql.cli:op_table',
     'jy-sql-link=jingyun_cli.sql.cli:link',
     'jy-server-port=jingyun_cli.server.find_port:find_one_port',
+    'jy-server-ip=jingyun_cli.server.ip.get_ip'
 ]}
 
 setup(name=name,
