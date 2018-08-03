@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.4.6
+jy-server-port -s 增加可选项registry port[5000-5010]
+
 ## 0.4.5
 add jy-server-ip
 
