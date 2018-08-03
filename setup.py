@@ -16,7 +16,7 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.4.6"
+version = "0.4.7"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"

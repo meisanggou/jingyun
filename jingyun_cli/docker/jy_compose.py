@@ -69,6 +69,7 @@ def main():
     config_man.add_argument("--restart", help=g_help("restart"))
     config_man.add_argument("-w", "--working-dir", dest="working_dir", help=g_help("working_dir"))
 
+    # commands_man.add_parser("kill", help="")
 
     # up_man = commands_man.add_parser("up", help="execute docker-compose up")
     # up_man.add_argument("args", nargs="*")

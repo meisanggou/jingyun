@@ -36,7 +36,7 @@ def find_one_port():
         logger.debug("check is listen %s" % item)
         if is_listen(item) is False:
             logger.info(item)
-            sys.exit(item)
+            sys.exit(0)
     sys.exit(1)
 
 if __name__ == "__main__":
