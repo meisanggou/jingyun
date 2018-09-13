@@ -72,3 +72,14 @@ def help_value(help_dict, key, *args):
         args = map(decode, args)
         msg = msg % tuple(args)
     return msg
+
+
+def jy_input(prompt, prompt_prefix=None):
+    if prompt_prefix is not None and prompt is not None:
+        prompt = "".join([prompt_prefix, prompt])
+    if not prompt.endswith("\n"):
+        prompt += "\n"
+    if sys.version_info[0] == 2:
+        return raw_input(prompt)
+    else:
+        return input(prompt)

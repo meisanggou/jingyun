@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.4.8
+add jy-jingd-reanalysis
+
 ## 0.4.7
 fix jy-server-port exit code
 
