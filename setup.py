@@ -16,7 +16,7 @@ if sys.version_info <= (2, 7):
     sys.exit(1)
 
 name = "jingyun-cli"
-version = "0.4.8"
+version = "0.4.9"
 url = "https://github.com/meisanggou/jingyun"
 license = "MIT"
 author = "meisanggou"
@@ -34,7 +34,7 @@ entry_points = {'console_scripts': [
     'jy-conf-read=jingyun_cli.conf.cli:read_conf',
     'jy-ssh-nonkey=jingyun_cli.ssh.cli:non_key',
     'jy-jingd-usermod=jingyun_cli.jingd.user:cli_main',
-    'jy-jingd-reanalysis=jingyun_cli.sample.cli_main',
+    'jy-jingd-reanalysis=jingyun_cli.sample:cli_main',
     'jy-supervisorctl=jingyun_cli.jingd.jy_supervisor:jy_supervisorctl',
     'jy-supervisord=jingyun_cli.jingd.jy_supervisor:jy_supervisord',
     'jy-docker-clear=jingyun_cli.docker.clear:clear',

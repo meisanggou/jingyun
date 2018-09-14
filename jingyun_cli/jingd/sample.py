@@ -10,7 +10,7 @@ except ValueError:
     from help import g_help, error_and_exit, jy_input
 from jingyun_cli.jingd import request_jingd
 
-os.environ.setdefault("JINGD_SAMPLE_ENDPOINT", "http://172.16.110.4:6005")
+os.environ.setdefault("JINGD_SAMPLE_ENDPOINT")
 
 
 def request_sample(method, url, data):
