@@ -77,6 +77,8 @@ def re_run(sample_no, account=None):
         r_seq_files[p["param_name"]] = ""
     keys = r_seq_files.keys()
     if len(keys) != len(files) - 1:
+        print(keys)
+        print(files)
         error_and_exit("Please Check input file")
     bucket = None
     for i in range(len(keys)):
