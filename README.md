@@ -1,6 +1,6 @@
 # jingyun
 
-## 0.5.0
+## 0.5.1
 add jy-jingd-reanalysis
 
 ## 0.4.7

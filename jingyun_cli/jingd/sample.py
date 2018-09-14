@@ -10,8 +10,6 @@ except ValueError:
     from help import g_help, error_and_exit, jy_input
 from jingyun_cli.jingd import request_jingd
 
-os.environ.setdefault("JINGD_SAMPLE_ENDPOINT")
-
 
 def request_sample(method, url, data):
     return request_jingd("sample", method, url, data)
