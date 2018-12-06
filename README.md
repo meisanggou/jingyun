@@ -1,5 +1,8 @@
 # jingyun
 
+## 0.5.3
+jy-jingd-usermod 支持新建账户
+
 ## 0.5.2
 jy-jingd-reanalysis 当seq_files和流程中定义的不一致时打印出来
 

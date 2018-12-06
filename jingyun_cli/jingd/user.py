@@ -45,6 +45,13 @@ def request_api(method, url, data):
         error_and_exit(r_data["message"])
 
 
+def new_user(account, password):
+    url = "/auth/"
+    method = "POST"
+    data = {"account": account, "new_password": password}
+    request_auth(method, url, data)
+
+
 def reset_password(account, password):
     url = "/auth/password/reset/admin/"
     method = "PUT"
@@ -76,7 +83,7 @@ def grant_genetic(account):
 def cli_main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--action", dest="action", help=g_help("action"), choices=["reset", "block", "unlock",
-                                                                                         "genetic"])
+                                                                                         "genetic", "new"])
     parser.add_argument("-u", "--user", dest="user", help=g_help("user"))
     parser.add_argument("-p", "--password", dest="password", help=g_help("new_password"), default="123456")
     if len(sys.argv) <= 1:
@@ -96,6 +103,8 @@ def cli_main():
         unlock_user(args.user)
     elif args.action == "genetic":
         grant_genetic(args.user)
+    elif args.action == "new":
+        new_user(args.user, args.password)
 
 
 if __name__ == "__main__":
