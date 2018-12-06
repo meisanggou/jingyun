@@ -1,6 +1,6 @@
 # jingyun
 
-## 0.5.3
+## 0.5.4
 jy-jingd-usermod 支持新建账户
 
 ## 0.5.2

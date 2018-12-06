@@ -48,7 +48,7 @@ def request_api(method, url, data):
 def new_user(account, password):
     url = "/auth/"
     method = "POST"
-    data = {"account": account, "new_password": password}
+    data = {"account": account, "password": password}
     request_auth(method, url, data)
 
 
