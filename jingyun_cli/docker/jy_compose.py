@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import os
+import re
 import sys
 import yaml
 from compose.cli.main import main as compose_main
@@ -27,11 +28,24 @@ def write_conf(args):
     if len(sys.argv) <= 1:
         sys.argv.append("-h")
     service_name = args.name
-    service_item = dict(image=args.image)
+    service_item = dict(image=args.image, container_name=service_name)
+    g_volumes = set()
     if args.volumes is not None:
+        for volume in args.volumes:
+            volume_p = volume.split(":")
+            if re.match("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$", volume_p[0]):
+                g_volumes.add(volume_p[0])
         service_item["volumes"] = args.volumes
     if args.ports is not None:
         service_item["ports"] = args.ports
+        for port in args.ports:
+            port_p = port.split(":")
+            if port_p[0] != port_p[1]:
+                break
+        else:
+            service_item["network_mode"] = "host"
+            del service_item["ports"]
+
     if args.restart is not None:
         service_item["restart"] = args.restart
     if args.command is not None:
@@ -43,13 +57,23 @@ def write_conf(args):
     file_path = get_file(args.compose_dir)
     if os.path.exists(file_path) is False:
         logger.debug(g_help("create", file_path))
-        o_y = dict(version='2', services={service_name: service_item})
+        o_y = dict(version='2.4', services={service_name: service_item})
+        if len(g_volumes) > 0:
+            o_y["volumes"] = dict()
+            for key in g_volumes:
+                o_y["volumes"][key] = dict(name=key)
     else:
         f = open(file_path)
         o_y = yaml.load(f)
+        o_y["version"] = "2.4"
         if service_name in o_y["services"]:
             logger.debug(g_help("exist_service"))
         o_y["services"][service_name] = service_item
+        if len(g_volumes) > 0:
+            if "volumes" not in o_y:
+                o_y["volumes"] = dict()
+            for key in g_volumes:
+                o_y["volumes"][key] = dict(name=key)
     w_f = open(file_path, "w")
     yaml.dump(o_y, stream=w_f, default_flow_style=False)
 
@@ -87,5 +111,6 @@ def main():
 
 if __name__ == "__main__":
     sys.argv.extend(["--debug", "config", "-n", "qc", "-i", "meisanggou/qc", "-v", "${JINGD_DATA_ROOT}:${JINGD_DATA_ROOT}",
-                     "-v", "${JINGD_CONF_DIR}:${JINGD_CONF_DIR}", "-v", "${GATCAPI_DIR}/Worker:/opt/worker", "-w", "/opt/worker", "python", "SampleSequencingLocalWorker.py"])
+                     "-v", "${JINGD_CONF_DIR}:${JINGD_CONF_DIR}", "-p", "6379:6379", "-v", "${GATCAPI_DIR}/Worker:/opt/worker",
+                     "-w", "/opt/worker", "-v", "mysql:/var/lib/mysql", "python", "SampleSequencingLocalWorker.py"])
     main()

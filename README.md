@@ -1,5 +1,11 @@
 # jingyun
 
+## 0.5.11
+jy-docker-compose支持volumes 使用version=2.4
+
+## 0.5.8
+jy-docker-compose network_mode=host 指定容器名
+
 ## 0.5.4
 jy-jingd-usermod 支持新建账户
 
